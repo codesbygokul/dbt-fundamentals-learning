@@ -10,5 +10,15 @@ sources:
     loaded_at_field: audit_created_datetime
     tables:
       - name: customer
+        columns:
+          - name: c_custkey
+            tests:
+              - unique
+              - not_null
         freshness: null
       - name: orders
+        columns:
+          - name: o_orderkey
+            tests:
+              - unique
+              - not_null

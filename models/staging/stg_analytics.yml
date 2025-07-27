@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_sf1__customers
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+  - name: stg_sf1__orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['O', 'F', 'P']
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('stg_sf1__customers')
+              field: customer_id
