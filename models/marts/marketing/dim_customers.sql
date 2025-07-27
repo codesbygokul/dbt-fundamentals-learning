@@ -2,7 +2,7 @@ With Customers as(
   select * from {{ ref('stg_sf1__customers') }}
 ), 
 orders as (
-  select * from {{ ref('stg_sf1__orders') }}
+  select * from {{ ref('fct_orders') }}
 ), 
 customer_orders as (
   select 
