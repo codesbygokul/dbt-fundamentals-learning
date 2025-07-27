@@ -1,0 +1,105 @@
+DBT Fundamentals
+
+Course Topics:
+--DBT Development Workflow
+Sources
+Models
+Tests
+Docs
+--Schedules
+Deployment
+
+
+Traditional Data Team
+Data Analysts - ETL
+Data Engineers - BI
+
+Modern Data Team
+Data Engineer - EL
+Analytics Engineer - T
+Data Analysts - BI
+
+
+Green ones - Sources - Raw Data
+Blue ones - Models - Designed stage tables
+
+--commands
+dbt run - run the models
+dbt test - test the models
+dbt docs generate - Generate a documentation site which can be shared to stakeholders on what the models are for.
+dbt build - combination of run and test
+
+YAML Files in dbt are used for generic test
+
+Singular test - Custom SQL query to test specific model
+Generic test - Pre defined tests, can be used for multiple models (Is PK - Unique and Not null?)
+
+
+Develop - IDE, CLI
+Deploy - 
+Run History 
+Jobs
+Environment
+Data Sources
+
+Unsaved (•) — The IDE detects unsaved changes to your file/folder 
+Modification (M) — The IDE detects a modification of existing files/folders 
+Added (A) — The IDE detects added files 
+Deleted (D) — The IDE detects deleted files
+
+
+what is modularity?
+different CTE - Making them as stage
+so that we can use it in multiple business logics
+this is called modular approach/modular thinking
+
+
+{{ ref('') }}
+
+{{ }} - Jinja in DBT
+ref - Macro/function - accepts one argument only
+
+sources aren't models
+staging models - should be one to one
+intermediate models - staging to next step/final table
+
+Sources:
+if location or naming of raw tables change, we need to update across multiple files
+Also to visualize raw tables in the lineage
+
+Source function:
+{{ source('pay', 'payments') }}
+which gets compiles to
+raw.pay.payments
+
+
+Tests:
+Singular - Specific test for a specific model
+Generic -
+unique
+not null
+relationships
+accepted_values
+
+dbt run
+dbt test
+where as it'll run all the flows in the DAG and create the objects in the warehouse
+
+when you run dbt test and one of the earlier model fails, it'll still run the remaining models in the DAG and fail the remaining as well.
+
+dbt build
+which runs and tests then moves to next model in the DAG
+
+dbt build --select +dim_customers - Build and upstream(before)
+dbt build --select dim_customers+ - Build and downstream(after)
+
+
+Documentation: Basically documentation
+Can able to answer the questions about our models, sources and other related details as well
+
+Deployment
+main branch - default branch
+dedicated prod schema
+dbt_production not dbt_gnavamani
+run any dbt commands on a schedule
+
