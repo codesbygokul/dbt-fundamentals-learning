@@ -2,6 +2,7 @@ version: 2
 
 sources:
   - name: analytics
+    description: A clone of a Snowflake Database
     database: analytics
     schema: dbt_analytics
     freshness: # make this a little more strict
@@ -10,15 +11,19 @@ sources:
     loaded_at_field: audit_created_datetime
     tables:
       - name: customer
+        description: raw customer data
         columns:
           - name: c_custkey
+            description: primary key for customers data
             tests:
               - unique
               - not_null
         freshness: null
       - name: orders
+        description: raw orders data
         columns:
           - name: o_orderkey
+            description: primary key for orders data
             tests:
               - unique
               - not_null
