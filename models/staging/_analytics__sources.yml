@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: analytics
+    database: analytics
+    schema: dbt_analytics
+    freshness: # make this a little more strict
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 1, period: day}
+    loaded_at_field: audit_created_datetime
+    tables:
+      - name: customer
+        freshness: null
+      - name: orders

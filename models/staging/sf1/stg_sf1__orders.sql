@@ -4,4 +4,4 @@
     o_orderdate as order_date, 
     o_orderstatus as status 
   from 
-    analytics.dbt_analytics.orders
+    {{ source('analytics', 'orders') }}
